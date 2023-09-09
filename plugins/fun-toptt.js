@@ -6,12 +6,12 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     let mime = (m.quoted ? m.quoted : m.msg).mimetype || ''
     //if (!/video|audio/.test(mime)) throw `✳️ ${msg.toavT()} :\n *${usedPrefix + command}*`
     let media = await q.download?.()
-    if (!media) throw '❎ Error al descargar medios'
+    if (!media) throw '❎ Gagal untuk unduh media'
     let audio = await toPTT(media, 'mp4')
-    if (!audio.data) throw '❎ Error al convertir'
+    if (!audio.data) throw '❎ Gagal mengonversi'
     conn.sendFile(m.chat, audio.data, 'audio.mp3', '', m, true, { mimetype: 'audio/mp4' })
     } catch (e) {
-        m.reply(`✳️ Responda el audio que desea convertir a nota de voz con :\n *${usedPrefix + command}*`)
+        m.reply(`✳️ Membalas audio yang ingin Anda ubah menjadi memo suara :\n *${usedPrefix + command}*`)
    }
 }
 handler.help = ['toav']

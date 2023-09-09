@@ -180,7 +180,7 @@ const listMessage = {
       
     default:
       if (!/[01]/.test(command)) return m.reply(`
-≡ Lista de Opciones
+≡ *Daftar opsi*
 
 ┌─⊷ *ADMIN*
 ▢ welcome
@@ -190,7 +190,7 @@ const listMessage = {
 ▢ nsfw
 ▢ onlylatinos
 └───────────── 
-┌─⊷ *USERS*
+┌─⊷ *USER*
 ▢ autolevelup
 ▢ chatbot 
 └─────────────
@@ -199,7 +199,7 @@ const listMessage = {
 ▢ solopv
 ▢ sologp
 └─────────────
-*📌 Ejemplo :*
+*📌 contoh :*
 *${usedPrefix}on* welcome
 *${usedPrefix}off* welcome
 `)
@@ -207,7 +207,7 @@ const listMessage = {
 }
 
 m.reply(`
-✅ *${type}* Se *${isEnable ? 'Activó' : 'Desactivó'}* ${isAll ? 'para este bot' : isUser ? '' : 'para este chat'}
+✅ *${type}* *${isEnable ? 'aktifkan' : 'dinonaktifkan'}* ${isAll ? 'untuk yang satu ini bot' : isUser ? '' : 'untuk obrolan ini'}
 `.trim()) 
 
 }

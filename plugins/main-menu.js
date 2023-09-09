@@ -2,55 +2,77 @@
 import { promises } from 'fs'
 import { join } from 'path'
 import fetch from 'node-fetch'
+import moment from 'moment-timezone'
+import os from 'os'
+import fs from 'fs'
 import { xpRange } from '../lib/levelling.js'
 //import { plugins } from '../lib/plugins.js'
 let tags = {
-  'main': 'ACERCA DE',
-  'game': 'JUEGOS',
-  'econ': 'NIVEL & ECONOMIA',
-  'rg': 'REGISTRO',
+  'main': 'INGFO',
+  'game': 'GAME',
+  'econ': 'RPG',
+  'rg': 'DAFATR',
   'sticker': 'STICKER',
+  'dl': 'DOWNLOAD',
   'img': 'IMAGEN',
   'maker': 'MAKER',
   'prem': 'PREMIUM',
-  'group': 'GRUPO',
-  'nable': 'EN/DISABLE OPCIONES', 
+  'group': 'GRUP',
+  'grup': 'GRUP ABSEN',
+  'nable': 'ON/OFF FITUR', 
   'nime': 'ANIME',
   'rnime': 'ANIME REACCION',
-  'dl': 'DESCARGAS',
+  'islamic': 'ISLAMI',
   'tools': 'TOOLS',
+  'ai': 'AI',
   'fun': 'FUN',
   'cmd': 'DATABASE',
   'nsfw': 'NSFW +18', 
   'ansfw': 'NSFW ANIME',
   'owner': 'OWNER', 
-  'advanced': 'AVANZADO',
+  'advanced': 'ADVANCED',
+  'audio': 'EDIT AUDIO',
 }
 const defaultMenu = {
   before: `
-◈ ━━━━━ *DyLux  ┃ ᴮᴼᵀ* ━━━━━ ◈
- 
-👋🏻 _Hola_ *%name*
-🧿 Nivel : *%level* 
-👥 Usuarios : %totalreg
-📈 Tiempo activo : %muptime
+◈ ━━━━━ *BOT ASISTEN RAZAN* ━━━━━ ◈
+
+${ucapan()} %name
+
 ─────────────
-▢ Crea tu propio bot 
-• https://youtu.be/xFqjKN1Qt80
-▢ Descarga *FGWhatsApp*
-• https://fgmods.epizy.com
+▢ Halo Kak 👋. Saya adalah bot WhatsApp otomatis yang dapat membantu melakukan sesuatu, mencari dan mendapatkan data atau informasi melalui WhatsApp.
+
+▢ Ketik .owner untuk menghubungi pemilik bot (bukan bot) untuk menyewa atau menanyakan sesuatu.
 ─────────────
+ ╭─────『 *INFO USER* 』
+❏ *𝙉𝙖𝙢𝙖:*  %name 
+❏ *𝙉𝙤𝙢𝙤𝙧:* %tag
+❏︎ *𝙇𝙞𝙢𝙞𝙩:* %diamond
+❏ *𝙍𝙤𝙡𝙚:* %role
+❏︎ *𝙇𝙚𝙫𝙚𝙡:* %level
+❏︎ *𝙀𝙭𝙥:* %exp / %maxexp
+❏︎ *𝙀𝙭𝙥 𝙏𝙤𝙩𝙖𝙡:* %totalexp
+╰–––––––––––––––༓
+ ╭─────『 *database* 』
+❏ *tanggal:*  %date 
+❏︎ *tanggal:* islam: %dateislamic
+❏ *time:* %time
+❏︎ *weton:* %weton
+❏︎ *platform:* nodejs
+❏︎ *total user:* %totalreg
+❏︎ *total terdaftar:* %rtotalreg
+╰–––––––––––––––༓
+
 %readmore
 Ⓟ = Premium
-ⓓ = Diamantes
+ⓓ = Diamond / limit
 -----  -----  -----  -----  -----
-  ≡ *LISTA DE MENUS*
+  ≡ *DAFTAR MENU*
 `.trimStart(),
-  header: '┌─⊷ *%category*',
-  body: '▢ %cmd %isdiamond %isPremium',
-  footer: '└───────────\n',
-  after: `
-`,
+  header: '╭─────『 *%category* 』',
+  body: '❏︎ %cmd %isdiamond %isPremium',
+  footer: '╰–––––––––––––––༓',
+  after: end,
 }
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
   try {
@@ -58,8 +80,10 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
     let { exp, diamond, level, role } = global.db.data.users[m.sender]
     let { min, xp, max } = xpRange(level, global.multiplier)
     let name = await conn.getName(m.sender)
+    let tag = `@${m.sender.split('@')[0]}`
+    let platform = os.platform()
     let d = new Date(new Date + 3600000)
-    let locale = 'es'
+    let locale = 'id'
     // d.getTimeZoneOffset()
     // Offset -420 is 18.00
     // Offset    0 is  0.00
@@ -144,31 +168,28 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
       totalexp: exp,
       xp4levelup: max - exp,
       github: _package.homepage ? _package.homepage.url || _package.homepage : '[unknown github url]',
-      level, diamond, name, weton, week, date, dateIslamic, time, totalreg, rtotalreg, role,
+      level, diamond, name, weton, week, date, dateIslamic, time, totalreg, rtotalreg, role, tag,
       readmore: readMore
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
-    
-    let pp = './src/fg_logo.jpg'
+    let pp = (fglog)
      
-    conn.sendFile(m.chat, pp, 'menu.jpg', text.trim(), m, null, rpl)
-    /*conn.sendButton(m.chat, text.trim(), '▢ DyLux  ┃ ᴮᴼᵀ\n▢ Sígueme en Instagram\nhttps://www.instagram.com/fg98_ff', pp, [
-      ['ꨄ︎ Apoyar', `${_p}donate`],
-      ['⏍ Info', `${_p}botinfo`],
-      ['⌬ Grupos', `${_p}gpdylux`]
-    ],m, rpl)*/
-  
-    m.react('📚') 
+    conn.sendFile(m.chat, pp, 'menu.jpg', text.trim(), m, null,)
+
+m.react (rwait)
     
   } catch (e) {
-    conn.reply(m.chat, '❎ Lo sentimos, el menú tiene un error', m)
+    conn.reply(m.chat, '❎ Maaf, menunya error', m)
     throw e
   }
+  let av = (musik)
+
+conn.sendFile(m.chat, av, 'audio.mp3', null, m, true, { type: 'audioMessage', ptt: true })
 }
 handler.help = ['help']
 handler.tags = ['main']
 handler.command = ['menu', 'help', 'menú'] 
-handler.register = false
+handler.register = true
 
 handler.exp = 3
 
@@ -184,3 +205,22 @@ function clockString(ms) {
   let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
   return [d, 'd ', h, 'h ', m, 'm '].map(v => v.toString().padStart(2, 0)).join('')
 }
+
+function ucapan() {
+  const time = moment.tz('Asia/Jakarta').format('HH')
+  let res = "Kok Belum Tidur Kak? 🥱"
+  if (time >= 4) {
+    res = "selamat Pagi 🌄"
+  }
+  if (time >= 10) {
+    res = "Selamat Siang ☀️"
+  }
+  if (time >= 15) {
+    res = "Selamat Sore 🌇"
+  }
+  if (time >= 18) {
+    res = "Selamat Malam 🌙"
+  }
+  return res
+}
+

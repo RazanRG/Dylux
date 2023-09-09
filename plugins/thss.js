@@ -1,0 +1,29 @@
+import fetch from 'node-fetch'
+
+let handler = async function (m, { conn, text, usedPrefix }) {
+  
+let m2 = `
+≡ _Saya sangat berterima kasih kepada kalian semua_
+
+┌─⊷ _*THANKS TO*_
+➠ Nurutomo
+➠ Dylux
+➠ Baileys 
+➠ RazanRG
+➠ Alvin ADS
+➠ Penyedia api
+➠ Penyedia modules
+➠ Penyedia script
+└──────────────
+
+`
+
+    let pp = 'https://i.ibb.co/hdXNkbC/thumbnail-robot-nans-offc.jpg' 
+    conn.sendFile(m.chat, pp, 'menu.jpg', m2, m, null,)
+   
+}
+handler.help = ['RAZAN', 'ALVIN', 'TQTO']
+handler.tags = ['TQTO']
+handler.command = /^(tqto|tq|RAZAN|ALVIN)$/i
+
+export default handler

@@ -1,8 +1,8 @@
 
 import fetch from 'node-fetch'
 let handler = async (m, { args, usedPrefix, command }) => {
-    if (!args[0]) throw `✳️ Ingresa el link de Tiktok qué contenga images`
-    if (!args[0].match(/tiktok/gi)) throw `❎ El enlace debe ser de TikTok`
+    if (!args[0]) throw `✳️ Masukkan link Tiktok yang berisi gambar`
+    if (!args[0].match(/tiktok/gi)) throw `❎ Tautannya harus dari TikTok`
 
     m.react(rwait)   
     try {
@@ -21,7 +21,7 @@ let handler = async (m, { args, usedPrefix, command }) => {
         m.react(done)
         
         } catch {
-    m.reply(`❎ Error intenta más tarde`)
+    m.reply(`❎ Kesalahan coba lagi nanti`)
 }
 
 }

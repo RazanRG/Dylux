@@ -12,12 +12,13 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     let q = m.quoted ? m.quoted : m
     let mime = (q.msg || q).mimetype || q.mediaType || ''
     if (/webp|image|video/g.test(mime)) {
-      if (/video/g.test(mime)) if ((q.msg || q).seconds > 11) return m.reply('Máximo 10 segundos')
+      if (/video/g.test(mime)) if ((q.msg || q).seconds > 11) return m.reply('maxsimal 1 detik')
       let img = await q.download?.()
-      if (!img) throw `✳️ Responde a una imagen o video con*${usedPrefix + command}*`
+      if (!img) throw `✳️ Membalas gambar atau video dengan*${usedPrefix + command}*`
       let out
       try {
         stiker = await sticker(img, false, f, g)
+        m.reply (stikerwait)
       } catch (e) {
         console.error(e)
       } finally {
@@ -37,7 +38,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     console.error(e)
     if (!stiker) stiker = e
   } finally {
-    if (stiker) conn.sendFile(m.chat, stiker, 'sticker.webp', '', m, null, rpl)
+    if (stiker) conn.sendFile(m.chat, stiker, 'sticker.webp', '', m, null)
     else throw 'La conversión ha fallado, intenta enviar primero *imagen/video/gif* y luego responde con el comando'
   }
 }

@@ -7,32 +7,32 @@ let handler = async (m, { conn, participants, groupMetadata }) => {
     const listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).join('\n')
     const owner = groupMetadata.owner || groupAdmins.find(p => p.admin === 'superadmin')?.id || m.chat.split`-`[0] + '@s.whatsapp.net'
     let text = `
-┌──「 *INFO DE GRUPO* 」
+┌──「 *INFO GROUP* 」
 ▢ *♻️ID:*
    • ${groupMetadata.id}
-▢ *🔖Nombre* : 
+▢ *🔖Nama* : 
 • ${groupMetadata.subject}
-▢ *👥Miembros* :
+▢ *👥Member* :
 • ${participants.length}
-▢ *🤿Dueño de Grupo:*
+▢ *🤿Pemilik Grup:*
 • @${owner.split('@')[0]}
-▢ *🕵🏻‍♂️Admins:*
+▢ *🕵🏻‍♂️Admin:*
  ${listAdmin}
-▢ *🪢 Configuración de grupo:*
-• ${isBanned ? '✅' : '❎'} Baneado
-• ${welcome ? '✅' : '❎'} Bienvenida
+▢ *🪢 konfigurasi grup:*
+• ${isBanned ? '✅' : '❎'} banned
+• ${welcome ? '✅' : '❎'} welcome
 • ${detect ? '✅' : '❎'} Detector
 • ${del ? '❎' : '✅'} Anti Delete
 • ${antiLink ? '✅' : '❎'} Anti Link WhatsApp
 
-*▢  📬 Configuración de mensajes:*
-• Bienvenida: ${sWelcome}
-• Despedida: ${sBye}
-• Promovidos: ${sPromote}
-• Degradados: ${sDemote}
+*▢  📬 Pengaturan pesan:*
+• welcome: ${sWelcome}
+• bye: ${sBye}
+• promte: ${sPromote}
+• demote: ${sDemote}
 
-▢ *📌Descripción* :
-   • ${groupMetadata.desc?.toString() || 'desconocido'}
+▢ *📌Keterangan* :
+   • ${groupMetadata.desc?.toString() || 'orang asing'}
 `.trim()
     conn.sendFile(m.chat, pp, 'pp.jpg', text, m, false, { mentions: [...groupAdmins.map(v => v.id), owner] })
 }

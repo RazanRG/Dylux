@@ -80,7 +80,7 @@ global.loadDatabase = async function loadDatabase() {
 loadDatabase()
 
 //-- SESSION
-global.authFolder = `sessions`
+global.authFolder = `Razan`
 const { state, saveCreds } = await useMultiFileAuthState(global.authFolder)
 let { version, isLatest } = await fetchLatestBaileysVersion() 
 /*const connectionOptions = {
@@ -93,7 +93,7 @@ const connectionOptions = {
 	    version,
         printQRInTerminal: true,
         auth: state,
-        browser: ['dylux-bot', 'Safari', '3.1.0'], 
+        browser: ['4KBOTZ', 'Safari', '3.1.0'], 
 	      patchMessageBeforeSending: (message) => {
                 const requiresPatch = !!(
                     message.buttonsMessage 
@@ -149,20 +149,29 @@ async function clearTmp() {
 }
 setInterval(async () => {
 	var a = await clearTmp()
-	console.log(chalk.cyan(`✅  Auto clear  | Se limpio la carpeta tmp`))
+	console.log(chalk.cyan(`✅  Auto clear  | Folder tmp telah dibersihkan`))
 }, 180000) //3 muntos
 
 async function connectionUpdate(update) {
-  const {connection, lastDisconnect, isNewLogin} = update;
-  if (isNewLogin) conn.isInit = true;
-  const code = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode;
-  if (code && code !== DisconnectReason.loggedOut && conn?.ws.socket == null) {
-    console.log(await global.reloadHandler(true).catch(console.error));
-    global.timestamp.connect = new Date;
+    const { receivedPendingNotifications, connection, lastDisconnect, isOnline, isNewLogin } = update
+  if (isNewLogin) conn.isInit = true
+  if (connection == 'connecting') console.log(chalk.redBright('⚡ Mengaktifkan Bot, Mohon tunggu sebentar...'))
+  if (connection == 'open') {
+     conn.sendMessage("62895602242948@s.whatsapp.net", { text: "LAPOR\nBOT SUDAH ONLINE🛰️"})
   }
-  
-  if (global.db.data == null) loadDatabase()
+  if (isOnline == true) console.log(chalk.green('Status Aktif'))
+  if (isOnline == false) console.log(chalk.red('Status Mati'))
+  if (receivedPendingNotifications) console.log(chalk.yellow('Menunggu Pesan Baru'))
+  if (connection == 'close') {
+  conn.sendMessage("62895602242948@s.whatsapp.net", { text: "LAPOR\nBOT OFF MENCOBA MENYABUNG ULANG🛰️"})
+  }
+  global.timestamp.connect = new Date
+  if (lastDisconnect && lastDisconnect.error && lastDisconnect.error.output && lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut && conn.ws.readyState !== CONNECTING) {
+    console.log(global.reloadHandler(true))
+  } 
+  if (global.db.data == null) await global.loadDatabase()
 }
+
 
 
 process.on('uncaughtException', console.error)
@@ -193,14 +202,14 @@ global.reloadHandler = async function (restatConn) {
     conn.ev.off('creds.update', conn.credsUpdate)
   }
 
-  conn.welcome = 'Hola, @user\nBienvenido a @group'
-  conn.bye = 'adiós @user'
-  conn.spromote = '@user promovió a admin'
-  conn.sdemote = '@user degradado'
-  conn.sDesc = 'La descripción ha sido cambiada a \n@desc'
-  conn.sSubject = 'El nombre del grupo ha sido cambiado a \n@group'
-  conn.sIcon = 'El icono del grupo ha sido cambiado'
-  conn.sRevoke = 'El enlace del grupo ha sido cambiado a \n@revoke'
+  conn.welcome = 'Halo, @user\nwelcome di @group'
+  conn.bye = 'bye-bye nigga @user'
+  conn.spromote = '@user kamu di angkat jadi admin'
+  conn.sdemote = '@user kamu bukan lagi admin sekrang'
+  conn.sDesc = 'Deskripsi telah diubah menjadi \n@desc'
+  conn.sSubject = 'nama group di ubah menjadi \n@group'
+  conn.sIcon = 'icon group di ubah'
+  conn.sRevoke = 'link group di ubah \n@revoke'
   conn.handler = handler.handler.bind(global.conn)
   conn.participantsUpdate = handler.participantsUpdate.bind(global.conn)
   conn.groupsUpdate = handler.groupsUpdate.bind(global.conn)
@@ -239,12 +248,12 @@ global.reload = async (_ev, filename) => {
   if (pluginFilter(filename)) {
     let dir = global.__filename(join(pluginFolder, filename), true)
     if (filename in global.plugins) {
-      if (existsSync(dir)) conn.logger.info(`🌟 Plugin Actualizado - '${filename}'`)
+      if (existsSync(dir)) conn.logger.info(`🌟 perbaruan plugin  - '${filename}'`)
       else {
-        conn.logger.warn(`🗑️ Plugin Eliminado - '${filename}'`)
+        conn.logger.warn(`🗑️ Plugin dihapus - '${filename}'`)
         return delete global.plugins[filename]
       }
-    } else conn.logger.info(`✨ Nuevo plugin - '${filename}'`)
+    } else conn.logger.info(`✨ plugin baru - '${filename}'`)
     let err = syntaxerror(readFileSync(dir), filename, {
       sourceType: 'module',
       allowAwaitOutsideFunction: true
@@ -306,5 +315,5 @@ async function _quickTest() {
 }
 
 _quickTest()
-  .then(() => conn.logger.info('✅ Prueba rápida realizado!'))
+  .then(() => conn.logger.info('✅ tes cepat dilakukan!'))
   .catch(console.error)

@@ -5,14 +5,14 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false
     else who = m.chat
     let user = global.db.data.users[who]
-    if (!who) throw `✳️ Etiqueta o menciona a alguien\n\n📌 Ejemplo : ${usedPrefix + command} @user`
+    if (!who) throw `✳️ tag atau sebutkan seseorang\n\n📌 Contoh: ${usedPrefix + command} @user`
     let users = global.db.data.users
     users[who].banned = true
     conn.reply(m.chat, `
-✅ BANEADO
+✅ DILARANG
 
 ───────────
-@${who.split`@`[0]} ya  no podrá  usar  mis comandos `, m, { mentions: [who] })
+@${who.split`@`[0]} kamu tidak lagi dapat menggunakan perintahku `, m, { mentions: [who] })
 }
 handler.help = ['ban @user']
 handler.tags = ['owner']

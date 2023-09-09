@@ -1,4 +1,3 @@
-
 import fg from 'api-dylux'
 let handler = async (m, { conn, text, args }) => {
 	
@@ -7,17 +6,17 @@ try {
   let res = await fg.ttStalk(args[0])
   let txt = `
 ┌──「 *TIKTOK STALK* 
-▢ *🔖Nombre:* ${res.name}
+▢ *🔖Nama:* ${res.name}
 ▢ *🔖Username:* ${res.username}
-▢ *👥Seguidores:* ${res.followers}
-▢ *🫂Siguiendo:* ${res.following}
+▢ *👥pengikut:* ${res.followers}
+▢ *🫂Mengikuti:* ${res.following}
 ▢ *📌Desc:* ${res.desc}
 
 ▢ *🔗 Link* : https://tiktok.com/${res.username}
 └────────────`
   await conn.sendFile(m.chat, res.profile, 'tt.png', txt, m)
 } catch {
-    m.reply(`✳️ Revisa que el nombre de usuario sea de TikTok`)
+    m.reply(`✳️ Periksa apakah nama pengguna berasal dari TikTok`)
 }
 }
 handler.help = ['tiktokstalk']

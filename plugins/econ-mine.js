@@ -4,15 +4,15 @@ let handler = async (m, { conn }) => {
 
   let hasil = Math.floor(Math.random() * 5000)
   let time = global.db.data.users[m.sender].lastmiming + 14400000
-  if (new Date - global.db.data.users[m.sender].lastmiming < 14400000) throw `⏳ _Espera_ *${msToTime(time - new Date())}* _para regresar a la mina_`
+  if (new Date - global.db.data.users[m.sender].lastmiming < 14400000) throw `⏳ _Tunggu_ *${msToTime(time - new Date())}* _untuk kembali ke tambang_`
   global.db.data.users[m.sender].exp += hasil
   m.reply(`
-🎉 Genial! minaste *${hasil} XP*`)
+🎉 Cemerlang! kamu menambang *${hasil} XP*`)
   global.db.data.users[m.sender].lastmiming = new Date * 1
 }
-handler.help = ['mine']
+handler.help = ['mining']
 handler.tags = ['econ']
-handler.command = ['minar', 'miming', 'mine'] 
+handler.command = ['minar', 'mining', 'mine'] 
 
 export default handler
 
@@ -26,5 +26,5 @@ function msToTime(duration) {
   minutes = (minutes < 10) ? "0" + minutes : minutes
   seconds = (seconds < 10) ? "0" + seconds : seconds
 
-  return hours + " hora(s) " + minutes + " minuto(s) " + seconds + " segundo(s)" 
+  return hours + " jam(d) " + minutes + " menit(d) " + seconds + " detik(d)" 
 }

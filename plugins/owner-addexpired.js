@@ -1,6 +1,6 @@
 
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-    if (!args[0] || isNaN(args[0])) throw `✳️ Ingrese un número que represente el número de días!\n\n📌 Ejemplo :\n*${usedPrefix + command}* 30`
+    if (!args[0] || isNaN(args[0])) throw `✳️ Masukkan angka yang mewakili jumlah hari!\n\n📌 Contoh:\n*${usedPrefix + command}* 30`
 
     let who
     if (m.isGroup) who = args[1] ? args[1] : m.chat
@@ -10,10 +10,10 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     var now = new Date() * 1
     if (now < global.db.data.chats[who].expired) global.db.data.chats[who].expired += nDays
     else global.db.data.chats[who].expired = now + nDays
-    let teks = `✅ Se estableció los días de vencimiento para \n*${await conn.getName(who)}* \n\n*Durante:* ${args[0]} Días\n\n*Cuenta regresiva :* ${msToDate(global.db.data.chats[who].expired - now)}`
+    let teks = `✅ Hari kedaluwarsa ditetapkan untuk \n*${await conn.getName(who)}* \n\n*Selama:* ${args[0]} hari\n\n*Hitung mundur :* ${msToDate(global.db.data.chats[who].expired - now)}`
     conn.reply(m.chat, teks, m)
 }
-handler.help = ['expired <días>']
+handler.help = ['expired <hari>']
 handler.tags = ['owner']
 handler.command = /^(expired|addexpired)$/i
 handler.rowner = true

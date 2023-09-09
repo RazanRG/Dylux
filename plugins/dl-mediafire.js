@@ -6,8 +6,8 @@ let free = 150 // limite de descarga
 let prem = 300 //si su servidor tienes menos de 2GB baja el límite
 let handler = async (m, { conn, args, text, usedPrefix, command, isOwner, isPrems }) => {
 	
-   if (!args[0]) throw `✳️ Ingrese el link de mediafire junto al comando`
-    if (!args[0].match(/mediafire/gi)) throw `❎ Link incorrecto`
+   if (!args[0]) throw `✳️ Masukkan tautan mediafire di sebelah perintah`
+    if (!args[0].match(/mediafire/gi)) throw `❎ tautan yang salah`
     m.react(rwait)
     
     let limit = isPrems || isOwner ? prem : free
@@ -19,11 +19,11 @@ let handler = async (m, { conn, args, text, usedPrefix, command, isOwner, isPrem
     let isLimit = limit * 1024 < filesize
     let caption = `
    ≡ *MEDIAFIRE*
-▢ *Nombre:* ${filename}
-▢ *Tamaño:* ${filesizeH}
-▢ *Extension:* ${ext}
-▢ *Subido:* ${aploud}
-${isLimit ? `\n▢ El archivo supera el límite de descarga *+${free} MB*\nPásate a premium para poder descargar archivos más de *${prem} MB*` : ''} 
+▢ *Nama:* ${filename}
+▢ *size:* ${filesizeH}
+▢ *Perpanjangan:* ${ext}
+▢ *Diunggah:* ${aploud}
+${isLimit ? `\n▢ File melebihi batas unduhan *+${free} MB*\nGunakan versi premium untuk dapat mengunduh file yang lebih besar dari *${prem} MB*` : ''} 
 `.trim()
     await conn.sendFile(m.chat, ss, 'ssweb.png', caption, m)  
     if(!isLimit) await conn.sendFile(m.chat, url, filename, '', m, null, { mimetype: ext, asDocument: true })
@@ -37,18 +37,18 @@ ${isLimit ? `\n▢ El archivo supera el límite de descarga *+${free} MB*\nPása
     let isLimit = limit * 1024 < filesizeB
     let caption = `
    ≡ *MEDIAFIRE*
-▢ *Nombre:* ${filename}
-▢ *Tamaño:* ${filesize}
+▢ *Nama:* ${filename}
+▢ *size:* ${filesize}
 ▢ *Extension:* ${ext}
-▢ *Subido:* ${upload_date}
-${isLimit ? `\n▢ El archivo supera el límite de descarga *+${free} MB*\nPásate a premium para poder descargar archivos más de *${prem} MB*` : ''} 
+▢ *diunggah:* ${upload_date}
+${isLimit ? `\n▢ File melebihi batas unduhan *+${free} MB*\nGunakan versi premium untuk dapat mengunduh file yang lebih besar dari *${prem} MB*` : ''} 
 `.trim()
 
 await conn.sendFile(m.chat, ss, 'ssweb.png', caption, m)
 if(!isLimit) await conn.sendFile(m.chat, url, filename, '', m, null, { mimetype: ext, asDocument: true })
     m.react(done)
 } catch {
-    m.reply(`Error: intenta con otro link`)
+    m.reply(`Kesalahan: coba tautan lain`)
 }
 
   }

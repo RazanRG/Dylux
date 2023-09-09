@@ -1,11 +1,11 @@
 let handler = async (m, { conn, args, usedPrefix, command }) => {
     let isClose = { // Switch Case Like :v
-        'open': 'not_announcement',
-        'close': 'announcement',
+        'open': 'bebas ngobrol',
+        'close': 'ditutup ngobrol',
     }[(args[0] || '')]
     if (isClose === undefined)
         throw `
-*✳️ Elija una opción:*
+*✳️ pilih opsi:*
   *▢ ${usedPrefix + command} close*
   *▢ ${usedPrefix + command} open*
 `.trim()

@@ -2,7 +2,7 @@
 import fetch from 'node-fetch'
 let handler = async (m, { conn, text }) => {
 	
-if (!text) throw `✳️ Ingresa el texto`
+if (!text) throw `✳️ Masukkan teksnya`
 m.react('💬')
 
 	try {
@@ -10,12 +10,12 @@ m.react('💬')
         let res = await gpt.json()
         await m.reply(res.result)
 	} catch {
-		m.reply(`❎ Error: intenta más tarde`)
+		m.reply(`❎ Kesalahan: coba lagi nanti`)
 	}
 
 }
-handler.help = ['ia <text>']
-handler.tags = ['tools']
+handler.help = ['ai <text>']
+handler.tags = ['ai']
 handler.command = ['ia', 'ai', 'chatgpt', 'openai', 'gpt']
 
 export default handler

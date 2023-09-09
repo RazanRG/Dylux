@@ -1,22 +1,23 @@
 
-let handler = async (m, { conn}) => {
+const { downloadContentFromMessage } = require('@adiwajshing/baileys')
+let handler = m => m
 
-let name = conn.getName(m.sender)
-let av = `./src/mp3/${pickRandom(["criss", "andrea"])}.mp3`
-
-conn.sendButton(m.chat, `Hola *${name}* \n \nNecesitas ayuda? \n`, fgig, null, [
-      ['⦙☰ Menu', '/help'],
-      ['⦙☰ Menu 2', '/menu2'],
-      ['⌬ Grupos', '/gpdylux']
-    ], m)
-conn.sendFile(m.chat, av, 'audio.mp3', null, m, true, { type: 'audioMessage', ptt: true })
-} 
-
-handler.customPrefix = /^(bot|dylux)$/i
-handler.command = new RegExp
-
-export default handler
-
-function pickRandom(list) {
-  return list[Math.floor(list.length * Math.random())]
+handler.before = async function (m) {
+    let chat = db.data.chats[m.chat]
+    if (/^[.~#/\$,](read)?viewonce/.test(m.text)) return
+    if (!chat.viewonce || chat.isBanned) return
+    if (m.mtype == 'viewOnceMessage') {
+        let msg = m.message.viewOnceMessage.message
+        let type = Object.keys(msg)[0]
+        let media = await downloadContentFromMessage(msg[type], type == 'imageMessage' ? 'image' : 'video')
+        let buffer = Buffer.from([])
+        for await (const chunk of media) {
+            buffer = Buffer.concat([buffer, chunk])
+        }
+        if (/video/.test(type)) {
+            return this.sendFile(m.chat, buffer, 'media.mp4', msg[type].caption || '', m)
+        } else if (/image/.test(type)) {
+            return this.sendFile(m.chat, buffer, 'media.jpg', msg[type].caption || '', m)
+        }
+    }
 }

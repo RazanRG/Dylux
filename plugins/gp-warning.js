@@ -4,31 +4,31 @@ let handler = async (m, { conn, text, args, groupMetadata, usedPrefix, command }
         let who
         if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false
         else who = m.chat
-        if (!who) throw `✳️ Etiqueta o menciona a alguien\n\n📌 Ejemplo : ${usedPrefix + command} @user`
-        if (!(who in global.db.data.users)) throw `✳️ El usuario no se encuentra en mi base de datos`
+        if (!who) throw `✳️ tag atau sebutkan seseorang\n\n📌 Contoh: ${usedPrefix + command} @user`
+        if (!(who in global.db.data.users)) throw `✳️ Pengguna tidak ditemukan di database saya`
         let name = conn.getName(m.sender)
         let warn = global.db.data.users[who].warn
         if (warn < war) {
             global.db.data.users[who].warn += 1
             m.reply(`
-⚠️ *Usuario Advertido* ⚠️
+⚠️ *Pengguna yang Diperingatkan* ⚠️
 
 ▢ *Admin:* ${name}
-▢ *Usuario:* @${who.split`@`[0]}
-▢ *Warns:* ${warn + 1}/${war}
-▢ *Razon:* ${text}`, null, { mentions: [who] }) 
+▢ *Pengguna:* @${who.split`@`[0]}
+▢ *peringatan:* ${warn + 1}/${war}
+▢ *alasan:* ${text}`, null, { mentions: [who] }) 
             m.reply(`
-⚠️ *ADVERTENCIA* ⚠️
-Recibiste una advertencia de un admin
+⚠️ *PERINGATAN* ⚠️
+Anda menerima peringatan dari admin
 
-▢ *Warns:* ${warn + 1}/${war} 
-Si recibes *${war}* advertencias serás eliminado automáticamente del grupo`, who)
+▢ *peringatan:* ${warn + 1}/${war} 
+Jika Anda menerima *${war}* peringatan, Anda akan otomatis dikeluarkan dari grup`, who)
         } else if (warn == war) {
             global.db.data.users[who].warn = 0
-            m.reply(`⛔ El usuario superó las *${war}* advertencias por lo tanto será eliminado`)
+            m.reply(`⛔ Oleh karena itu, pengguna yang melampaui *${war}* peringatan akan dikick`)
             await time(3000)
             await conn.groupParticipantsUpdate(m.chat, [who], 'remove')
-            m.reply(`♻️ Fuiste eliminado del grupo *${groupMetadata.subject}* porque ha sido advertido *${war}* veces`, who)
+            m.reply(`♻️ Anda dikeluarkan dari grup *${groupMetadata.subject}* karena Anda telah diperingatkan *${war}* kaliAnda dikeluarkan dari grup *${groupMetadata.subject}* karena Anda telah diperingatkan *${war}* kali`, who)
         }
 }
 handler.help = ['warn @user']

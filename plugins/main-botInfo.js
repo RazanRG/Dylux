@@ -45,40 +45,31 @@ let infobt = `
 ≡ *INFO BOT*
   
 *ESTADO*
-▢ *${groupsIn.length}* Chats de grupo
-▢ *${groupsIn.length}* Gropos unidos
-▢ *${groupsIn.length - groupsIn.length}* Grupos abandonados
-▢ *${chats.length - groupsIn.length}* Chats privados
+▢ *${groupsIn.length}* obrolan grup
+▢ *${groupsIn.length}* group bersatu
+▢ *${groupsIn.length - groupsIn.length}* group yang ditinggalkan
+▢ *${chats.length - groupsIn.length}* obrolan pribadi
 ▢ *${chats.length}* Total Chats
 
 *≡ OWNER*
-  *FG98*
+  *Razan RG*
 ▢ Instagram :
-  • https://instagram.com/fg98_ff
+  • https://instagram.com/4krazan7
 ▢ WhatsApp :
-  • (escribe solo si es necesario) 
+  • (private) 
 ▢ GitHub :
-  • https://github.com/FG98F
-▢ Telegram : 
-  • t.me/fgsupp_bot (FG) 
-  • t.me/fg98ff (canal)
-  • t.me/fgawgp (grupo)
-▢ YouTube : 
-  • https://youtube.com/fg98f
+  • https://github.com/RazanRG
   
- *≡ HELPERS*
-  *CRISS*
-▢ Instagram : https://www.instagram.com/sayurizuniga3
+ *≡ PEMBANTU*
+  *Alvin*
+▢ Instagram : https://www.instagram.com/5kalvin.exe
 ▢ WhatsApp : wa.me/
-  *ANDREA*
-▢ Instagram : https://
-▢ WhatsApp : wa.me/573125484672
 
  *≡ S E R V E R*
 *🛑 RAM:* ${format(totalmem() - freemem())} / ${format(totalmem())}
 *🔵 FreeRAM:* ${format(freemem())}
 
-*≡  NodeJS Uso de memoria*
+*≡ Memori NodeJS*
 ${'```' + Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v => v.length)), ' ')}: ${format(used[key])}`).join('\n') + '```'}
 `
 m.reply(infobt)

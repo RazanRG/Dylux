@@ -2,9 +2,9 @@
 
 let handler = async (m, { conn }) => {
     conn.reply(m.chat, `
-*LISTA DE  COMANDOS*
+*LIST PERINTAH*
 
-▢ *Info:* Si esta en *negrita*  esta bloqueado
+▢ *Info:* kalau *tebal*  diblokir
 
 ──────────────────
 ${Object.entries(global.db.data.sticker).map(([key, value], index) => `${index + 1}. ${value.locked ? `(bloqueado) ${key}` : key} : ${value.text}`).join('\n')}

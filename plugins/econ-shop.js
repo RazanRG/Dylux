@@ -9,11 +9,11 @@ let handler = async (m, { conn, command, args }) => {
     global.db.data.users[m.sender].exp -= xpperdiamond * count
     global.db.data.users[m.sender].diamond += count
     conn.reply(m.chat, `
-┌─「 *NOTA DE PAGO* 」
-‣ *Compra nominal* : + ${count}💎 
-‣ *Gastado* : -${xpperdiamond * count} XP
+┌─「 *CATATAN PEMBELIAN* 」
+‣ *pembelian nominal* : + ${count}💎 
+‣ *Dihabiskan* : -${xpperdiamond * count} XP
 └──────────────`, m)
-  } else conn.reply(m.chat, `❎ Lo siento, no tienes suficientes *XP* para comprar *${count}* Diamantes💎\n\n Puedes conseguir *XP* usando los comandos del *menú juegos y economía*`, m)
+  } else conn.reply(m.chat, `❎ Maaf, Anda tidak mempunyai cukup *XP* untuk membeli *${count}* Diamond💎\n\n Anda bisa mendapatkan *XP* menggunakan perintah di menu *game dan rpg*`, m)
 }
 handler.help = ['buy', 'buyall']
 handler.tags = ['econ']

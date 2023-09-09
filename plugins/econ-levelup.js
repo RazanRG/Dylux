@@ -7,14 +7,14 @@ let handler = async (m, { conn }) => {
     if (!canLevelUp(user.level, user.exp, global.multiplier)) {
         let { min, xp, max } = xpRange(user.level, global.multiplier)
         let txt = `
-┌───⊷ *NIVEL*
-▢ Nombre : *${name}*
-▢ Nivel : *${user.level}*
-▢ XP : *${user.exp - min}/${xp}*
-▢ Rango : *${user.role}*
+┌───⊷ *LEVEL*
+▢ *nama* : *${name}*
+▢ *level* : *${user.level}*
+▢ *xp* : *${user.exp - min}/${xp}*
+▢ *role*: *${user.role}*
 └──────────────
 
-Te falta *${max - user.exp}* de *XP* para subir de nivel
+kamu kehilangan *${max - user.exp}* dari *XP* untuk naik level
 `.trim()
 try {
   let imgg = API('fgmods', '/api/maker/rank', {
@@ -39,12 +39,12 @@ try {
 
         let str = `
 ┌─⊷ *LEVEL UP*
-▢ Nivel anterior : *${before}*
-▢ Nivel actual : *${user.level}*
-▢ Rango : *${user.role}*
+▢ Level sebelumnya : *${before}*
+▢ Level sekarang : *${user.level}*
+▢ Role : *${user.role}*
 └──────────────
 
-*_Cuanto más interactúes con los bots, mayor será tu nivel_*
+*_Semakin banyak Anda berinteraksi dengan bot, semakin tinggi level Anda_*
 `.trim()
         try {
             let img = API('fgmods', '/api/maker/levelup', { 
@@ -57,7 +57,7 @@ try {
     }
 }
 
-handler.help = ['levelup']
+handler.help = ['level']
 handler.tags = ['econ']
 handler.command = ['nivel', 'lvl', 'levelup', 'level'] 
 

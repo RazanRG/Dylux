@@ -3,7 +3,7 @@ let handler = async(m, { conn, usedPrefix, command }) => {
 	
     let img = await conn.getFile(global.API('fgmods', '/api/img/asupan-la', { }, 'apikey'))
     let asupan = img.data
-    conn.sendFile(m.chat, asupan, 'vid.mp4', `✅ Resultado`, m)
+    conn.sendFile(m.chat, asupan, 'vid.mp4', `✅ hasil`, m)
     m.react(dmoji)
     
 }

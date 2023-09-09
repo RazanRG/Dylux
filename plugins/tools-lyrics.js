@@ -2,7 +2,7 @@
 import fg from 'api-dylux'
 let handler = async (m, {conn, text }) => {
   let teks = text ? text : m.quoted && m.quoted.text ? m.quoted.text : ''
-   if (!teks) throw `✳️ Ingresa el título de una canción`
+   if (!teks) throw `✳️ Masukkan judul lagu`
    try {
  let res = await fg.lyrics(text);
  let mes = `▢ *${res.title}*
@@ -15,8 +15,8 @@ let handler = async (m, {conn, text }) => {
 } 
 
 }
-handler.help = ['lyrics']
-handler.tags = ['tools']
-handler.command = ['letra', 'lyrics', 'letras'] 
+handler.help = ['lirik']
+handler.tags = ['ai']
+handler.command = ['lirik', 'lyrics', 'letras'] 
 
 export default handler

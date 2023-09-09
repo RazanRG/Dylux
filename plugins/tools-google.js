@@ -3,7 +3,7 @@ let handler = async (m, { conn, command, args }) => {
     const fetch = (await import('node-fetch')).default
     let full = /f$/i.test(command)
     let text = args.join` `
-    if (!text) return conn.reply(m.chat, '✳️ Que quieres buscar en Google?', m)
+    if (!text) return conn.reply(m.chat, '✳️ Apa yang ingin Anda cari di Google??', m)
     let url = 'https://google.com/search?q=' + encodeURIComponent(text)
     let search = await googleIt(text)
     let msg = search.articles.map(({
@@ -23,7 +23,7 @@ let handler = async (m, { conn, command, args }) => {
     }
 }
 handler.help = ['google']
-handler.tags = ['tools']
+handler.tags = ['ai']
 handler.command = ['google'] 
 handler.diamond = true
 

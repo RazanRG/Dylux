@@ -13,22 +13,22 @@ let handler = async (m, { conn, args, participants }) => {
   let usersLevel = sortedLevel.map(enumGetKey)
   let len = args[0] && args[0].length > 0 ? Math.min(50, Math.max(parseInt(args[0]), 5)) : Math.min(5, sortedExp.length)
   let text = `
-       ≡ *TABLA DE CLASIFICACION*
+       ≡ *LEADERBOARD*
     
 ▢ *TOP ${len} XP* 🧬
-Tú : *${usersExp.indexOf(m.sender) + 1}* de *${usersExp.length}*
+anda : *${usersExp.indexOf(m.sender) + 1}* dari *${usersExp.length}*
 
 ${sortedExp.slice(0, len).map(({ jid, exp }, i) => `*${i + 1}.* ${participants.some(p => areJidsSameUser(jid, p.id)) ? `(${conn.getName(jid)}) wa.me/` : '@'}${jid.split`@`[0]} ➭ _*XP ${exp}*_`).join`\n`}
 
-▢ *TOP ${len} DIAMANTES💎* 
-Tú : *${usersLim.indexOf(m.sender) + 1}* de *${usersLim.length}*
+▢ *TOP ${len} DIAMOND💎* 
+anda : *${usersLim.indexOf(m.sender) + 1}* dari *${usersLim.length}*
 
-${sortedLim.slice(0, len).map(({ jid, diamond }, i) => `*${i + 1}.* ${participants.some(p => areJidsSameUser(jid, p.id)) ? `(${conn.getName(jid)}) wa.me/` : '@'}${jid.split`@`[0]} ➭ _*Diamantes ${diamond}*_`).join`\n`}
+${sortedLim.slice(0, len).map(({ jid, diamond }, i) => `*${i + 1}.* ${participants.some(p => areJidsSameUser(jid, p.id)) ? `(${conn.getName(jid)}) wa.me/` : '@'}${jid.split`@`[0]} ➭ _*Diamond ${diamond}*_`).join`\n`}
 
-▢ *TOP ${len} NIVEL* ⬆️
-Tú : *${usersLevel.indexOf(m.sender) + 1}* de *${usersLevel.length}*
+▢ *TOP ${len} LEVEL* ⬆️
+anda : *${usersLevel.indexOf(m.sender) + 1}* dari *${usersLevel.length}*
 
-${sortedLevel.slice(0, len).map(({ jid, level }, i) => `*${i + 1}.* ${participants.some(p => areJidsSameUser(jid, p.id)) ? `(${conn.getName(jid)}) wa.me/` : '@'}${jid.split`@`[0]} ➭ _*Nivel ${level}*_`).join`\n`}
+${sortedLevel.slice(0, len).map(({ jid, level }, i) => `*${i + 1}.* ${participants.some(p => areJidsSameUser(jid, p.id)) ? `(${conn.getName(jid)}) wa.me/` : '@'}${jid.split`@`[0]} ➭ _*level ${level}*_`).join`\n`}
 `.trim()
   conn.reply(m.chat, text, m, {
     mentions: [...usersExp.slice(0, len), ...usersLim.slice(0, len), ...usersLevel.slice(0, len)].filter(v => !participants.some(p => areJidsSameUser(v, p.id) )) 
