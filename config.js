@@ -13,8 +13,8 @@ global.owner = [
 global.mods = ['-'] 
 global.prems = ['-', '-', '-']
 
-global.lann = 'RAZANGANTENG' // https://api.betabotz.org
-global.btc = 'InolEnIR' //https://api.botcahx.live
+global.lann = 'your_api' // https://api.betabotz.org
+global.btc = 'your_api' //https://api.botcahx.live
 
 
 global.APIs = { // API Prefix
@@ -30,9 +30,9 @@ global.APIKeys = { // APIKey Here
   // 'https://website': 'apikey'
   'https://api.xteam.xyz': 'd90a9e986e18778b',  //biarin
   'https://zenzapis.xyz': '675e34de8a',  //biarin
-  'https://api-fgmods.ddns.net': '4PDkC8Ji', //login di web https://api-fgmods.ddns.net/
-  'https://api.betabotz.org': 'RAZANGANTENG', // login di webnya
-  'https://api.botcahx.live': 'InolEnIR' 
+  'https://api-fgmods.ddns.net': 'your_api', //login di web https://api-fgmods.ddns.net/
+  'https://api.betabotz.org': 'your_api', // login di webnya
+  'https://api.botcahx.live': 'your_api' 
 }
 //******************* 》database owner《 *******************\\
 // card own
